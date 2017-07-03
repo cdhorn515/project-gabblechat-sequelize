@@ -19,15 +19,16 @@ module.exports = {
         password: req.body.password
       }).then(function(newUser) {
         req.session.userId = newUser.id;
+        console.log(req.session.userId);
         console.log('validating');
       }).catch(function(error){
         // var error = error;
-        console.log(error);
+        console.log('here ', error);
         var context = {
-          msg: error
+          msg: error.message
         };
         res.render('signup', context);
-        return;
+        // return;
       });
   },
   loginLanding: function(req, res) {
