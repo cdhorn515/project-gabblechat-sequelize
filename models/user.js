@@ -10,6 +10,7 @@ module.exports = function(sequelize, DataTypes) {
       as: 'Gabs',
       foreignKey: 'userId'
     });
+    User.belongsToMany(models.Gab, {as: 'likes', through: 'userGabs', foreignKey: 'userId'});
   };
   return User;
 };

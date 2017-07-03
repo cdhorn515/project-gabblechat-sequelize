@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
         as: 'user',
         foreignKey: 'userId'
       });
-    //   Gab.belongsToMany(models.User, {as: 'likes', through: 'userGabs', foreignKey: 'gabId'});
+      Gab.belongsToMany(models.User, {as: 'likes', through: 'userGabs', foreignKey: 'gabId'});
     };
     return Gab;
   };
