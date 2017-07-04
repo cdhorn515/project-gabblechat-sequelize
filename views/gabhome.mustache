@@ -7,10 +7,10 @@
 
 {{#gabs}}
 <fieldset>
-<form class="" action="/gabhome" method="post">
+<form class="" action="/gabhome/{{id}}" method="post">
   <p>{{user.name}}: {{text}}
   <span>
-    <input type="submit" name="like" value="Like for gab{{id}}" id="{{id}}">
+    <input type="submit" name="like" value="Like" id="{{id}}">
   </span>
 </p>
   <p>{{createdAt}}</p>

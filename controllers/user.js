@@ -67,13 +67,15 @@ module.exports = {
         //returns entire object of user created
         console.log('user id is: ', req.session.userId);
         console.log('user name is: ', req.session.user.name);
-        res.redirect('/gabhome');
-      } else {
-        var context = {
-          msg: "this user is not in our database, please complete the sign up form in order to create your account"
-        };
-        res.render('signup', context);
+        res.render('gabhome');
+        return;
       }
+      // } else {
+      //   var context = {
+      //     msg: "this user is not in our database, please complete the sign up form in order to create your account"
+      //   };
+      //   res.render('signup', context);
+      // }
     });
   }
 };
