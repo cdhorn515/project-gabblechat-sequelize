@@ -13,9 +13,16 @@ module.exports = {
           }
         ]
       }).then(function(gabs){
+        var context = {
+          model: gabs,
+          loggedIn: true,
+          name: req.session.name,
+          signedIn: true
+        };
         //this shows as undefined
         // console.log('gab.text', gab.text);
-        res.render('gabhome', {gabs: gabs});
+        console.log("gabble line 24", req.session.name);
+        res.render('gabhome', context);
       });
   },
   createPost: function (req, res){

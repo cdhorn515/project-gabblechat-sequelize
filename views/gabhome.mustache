@@ -4,8 +4,23 @@
     <title>Gab Home</title>
   </head>
   <body>
+    <header>
 
-{{#gabs}}
+      <ul>
+        <li>Gabble</li>
+        <li>Create a new Gab</li>
+        <!--loggedIn should be boolean  -->
+        {{#loggedIn}}
+        <li>Logged in as {{name}}</li>
+          {{/loggedIn}}
+        <!-- signedIn should be boolean -->
+        {{#signedIn}}<li>Log out</li>{{/signedIn}}
+      {{^signedIn}}<li>Log in</li>{{/signedIn}}
+      </ul>
+
+    </header>
+
+{{#model}}
 <fieldset>
 <form class="" action="/gabhome/{{id}}" method="post">
   <p>{{user.name}}: {{text}}
@@ -16,4 +31,5 @@
   <p>{{createdAt}}</p>
 </form>
 </fieldset>
-{{/gabs}}
+{{/model}}
+{{context}}

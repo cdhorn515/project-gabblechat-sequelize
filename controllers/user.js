@@ -6,10 +6,10 @@ const Sequelize = require('sequelize');
 // session = require('express-session');
 
 module.exports = {
-  index: function(req, res) {
-    var context = {};
-    res.render('signup', context);
-  },
+  // index: function(req, res) {
+  //   var context = {};
+  //   res.render('signup', context);
+  // },
   landing: function(req, res) {
     res.render('signup');
   },
@@ -52,6 +52,7 @@ module.exports = {
     //pull data from page entry
     var name = req.body.name;
     var password = req.body.password;
+    console.log(name);
     //findOne in database that matches username
     models.User.findOne({
       where: {
@@ -67,8 +68,8 @@ module.exports = {
         //returns entire object of user created
         console.log('user id is: ', req.session.userId);
         console.log('user name is: ', req.session.user.name);
-        res.render('gabhome');
-        return;
+        res.redirect('/gabhome');
+        // return;
       }
       // } else {
       //   var context = {

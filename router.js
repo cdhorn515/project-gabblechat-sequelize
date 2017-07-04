@@ -8,7 +8,7 @@ const express = require('express'),
 
 module.exports = function(router) {
 
-router.get('/', userController.index);
+router.get('/', userController.landing);
 
 router.get('/signup', userController.landing);
 router.post('/signup', userController.createUser);
