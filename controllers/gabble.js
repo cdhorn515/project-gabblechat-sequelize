@@ -13,7 +13,7 @@ module.exports = {
           }
         ]
       }).then(function(gabs){
-        console.log(gabs);
+        console.log(gabs.text);
         res.render('gabhome', {gabs: gabs});
       });
   },
@@ -23,6 +23,7 @@ module.exports = {
           text: req.body.gab,
           userId: req.session.userId
       }).then(function(newGab){
+        req.session.gabId= newGab.id;
         console.log(newGab.text);
         var context = {
           message: "uploaded new gab"
@@ -30,37 +31,15 @@ module.exports = {
         res.render('gabhome', context);
       });
     // }
-}};
-
-//replace with this once gabs are in system
-/*
-landing: function (req, res){
-    models.Gab.findAll({
-      include: [
-        {
-          model: models.User,
-          as: 'user'
-        }
-      ]
-    }).then(function(gabs){
-      console.log(gabs);
-      res.render('gabhome', {gabs: gabs});
+  },
+  likePost: function (req, res){
+    models.userGabs.create({
+      userId: req.session.userId,
+      gabId: req.body.id
+    }).then(function(userGab){
+      req.session.userGabId = userGab.id;
+      console.log(userId + ' added like to post ' + gabId);
+      console.log("this is like # ", req.session.userGabId);
     });
-},
-createPost: function (req, res){
-    // if(result.notEmpty()) {
-      models.Gab.create({
-        text: req.body.gab,
-        userId: req.session.userId
-    }).then(function(newGab){
-      console.log(newGab.text);
-      var context = {
-        message: "uploaded new gab"
-      };
-      res.render('gabhome', context);
-    });
-  // }
-
-}};
-
-*/
+  }
+};

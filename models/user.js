@@ -1,8 +1,20 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
-    name: DataTypes.STRING,
-    password: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+      validate: {
+        isAlpha: {
+          msg: 'Unless you\'re from another planet, your name should only contain letters'
+        }
+      }
+    },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false
+      }
   }, {});
 
   User.associate = function(models) {
@@ -10,7 +22,11 @@ module.exports = function(sequelize, DataTypes) {
       as: 'Gabs',
       foreignKey: 'userId'
     });
-    User.belongsToMany(models.Gab, {as: 'likes', through: 'userGabs', foreignKey: 'userId'});
+    User.belongsToMany(models.Gab, {
+      as: 'likes',
+      through: 'userGabs',
+      foreignKey: 'userId'
+    });
   };
   return User;
 };

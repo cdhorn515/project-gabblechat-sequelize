@@ -1,7 +1,10 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var Gab = sequelize.define('Gab', {
-    text: DataTypes.STRING
+    text: {
+      type: DataTypes.STRING,
+      max: 140
+    }
   }, {});
 
     Gab.associate = function(models){

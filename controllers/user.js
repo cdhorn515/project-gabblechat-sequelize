@@ -1,5 +1,5 @@
 const models = require('../models');
-// const Sequelize = require('sequelize');
+const Sequelize = require('sequelize');
 // console.log('here ', models);
 // console.log(models);
 // User = require('')
@@ -14,23 +14,35 @@ module.exports = {
     res.render('signup');
   },
   createUser: function(req, res) {
+    // console.log(models.use);
       models.User.create({
         name: req.body.name,
         password: req.body.password
-      }).then(function(newUser) {
+      }).then(function(newUser){
         req.session.userId = newUser.id;
         console.log(req.session.userId);
         console.log('validating');
-      }).catch(function(error){
-        // var error = error;
-        console.log('here ', error);
+      }).catch(Sequelize.UniqueConstraintError, function(error){
+        console.log('unique ', error);
         var context = {
-          msg: error.message
+          msg: msg
         };
         res.render('signup', context);
-        // return;
+      }).catch(Sequelize.ValidationError, function (error) {
+        console.log('validate ', error);
+        var context = {
+          msg: msg
+        };
+        res.render('signup', context);
+      }).catch(function(error){
+        console.log('oh no, something went wrong! ', error);
+        var context = {
+          msg: "oh no!"
+        };
+        res.render('signup', context);
       });
-  },
+    },
+
   loginLanding: function(req, res) {
     var context = {};
     res.render('login', context);
