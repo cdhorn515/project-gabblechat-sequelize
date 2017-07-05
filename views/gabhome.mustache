@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html>  <head>
+<html lang="en">  
+<head>
     <meta charset="utf-8">
     <title>Gab Home</title>
+    <link rel="stylesheet" href="/static/styles.css">
   </head>
   <body>
     <header>
 
       <ul>
+        <span>
         <li>Gabble</li>
         <li>Create a new Gab</li>
         <!--loggedIn should be boolean  -->
@@ -16,20 +19,32 @@
         <!-- signedIn should be boolean -->
         {{#signedIn}}<li>Log out</li>{{/signedIn}}
       {{^signedIn}}<li>Log in</li>{{/signedIn}}
+    </span>
       </ul>
 
     </header>
 
 {{#model}}
-<fieldset>
-<form class="" action="/gabhome/{{id}}" method="post">
+<fieldset class="section">
+<form class="" action="/likes/:{{id}}" method="post">
   <p>{{user.name}}: {{text}}
   <span>
-    <input type="submit" name="like" value="Like" id="{{id}}">
+    <input type="submit" name="like" value="like" id="{{id}}">
+    <input type="hidden" name="like" value="{{id}}">
   </span>
 </p>
-  <p>{{createdAt}}</p>
+  <p>{{createdAt}}
+  </p>
+  {{#likes}}
+  <p>{{numberOfLikes}} like
+  {{/likes}}
+  {{^likes}}
+  <p>No likes yet
+  {{/likes}}
+    <span>
+      <input type="submit" name="like" value="Delete" id="{{userId}}">
+    </span>
+  </p>
 </form>
 </fieldset>
 {{/model}}
-{{context}}

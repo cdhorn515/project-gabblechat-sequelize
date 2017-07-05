@@ -11,6 +11,10 @@ module.exports = {
   //   res.render('signup', context);
   // },
   landing: function(req, res) {
+    var context = {
+      loggedIn: false,
+      signedIn: false
+    };
     res.render('signup');
   },
   createUser: function(req, res) {
@@ -20,18 +24,18 @@ module.exports = {
         password: req.body.password
       }).then(function(newUser){
         req.session.userId = newUser.id;
-        console.log(req.session.userId);
+        console.log('new userId ', req.session.userId);
         console.log('validating');
       }).catch(Sequelize.UniqueConstraintError, function(error){
         console.log('unique ', error);
         var context = {
-          msg: msg
+          msg: error.message
         };
         res.render('signup', context);
       }).catch(Sequelize.ValidationError, function (error) {
         console.log('validate ', error);
         var context = {
-          msg: msg
+          msg: error.message
         };
         res.render('signup', context);
       }).catch(function(error){
@@ -44,7 +48,11 @@ module.exports = {
     },
 
   loginLanding: function(req, res) {
-    var context = {};
+    var context = {
+      loggedIn: false,
+      signedIn: false
+    };
+    req.session = '';
     res.render('login', context);
   },
   login: function(req, res) {

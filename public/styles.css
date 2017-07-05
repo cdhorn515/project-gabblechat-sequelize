@@ -1,0 +1,29 @@
+body{
+  background-color: orange;
+  margin: 100px, 50px;
+}
+/*Navigation at top*/
+ul{
+  list-style: none;
+  background-color: #000
+}
+li{
+  float: left;
+  margin-right: 15px;
+}
+li a{
+  display: block;
+  color: #FFF;
+  text-align: center;
+  text-decoration: underline;
+}
+.section{
+  clear: left;
+}
+
+fieldset{
+  border: none;
+  border-bottom: 2px solid #000;
+  width: 60%;
+
+}

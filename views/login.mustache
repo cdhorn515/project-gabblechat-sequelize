@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
   <title>Login</title>
+  <link rel="stylesheet" href="/static/styles.css">
+
 </head>
+<header>
+
+  <ul>
+    <span>
+    <li>Gabble</li>
+    <li>Create a new Gab</li>
+    <!--loggedIn should be boolean  -->
+    {{#loggedIn}}
+    <li>Logged in as {{name}}</li>
+      {{/loggedIn}}
+    <!-- signedIn should be boolean -->
+    {{#signedIn}}<li>Log out</li>{{/signedIn}}
+  {{^signedIn}}<li>Log in</li>{{/signedIn}}
+</span>
+  </ul>
+
+</header>
 
 <body>
 

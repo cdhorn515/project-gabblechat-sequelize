@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Create Gab</title>
+    <title>likes</title>
+    <link rel="stylesheet" href="/static/styles.css">
+
   </head>
   <body>
     <header>
@@ -23,17 +25,15 @@
 
     </header>
 
-    <form class="" action="/creategab" method="post">
-      <label for="gab">Gab</label>
-
-      <div>
-      <textarea name="gab" rows="8" cols="80" placeholder="max of 140 characters"></textarea>
-        </div>
-      <div>
-        <input type="submit" name="" value="Submit">
-      </div>
-    </form>
-
-
+    {{#model}}
+      <p>{{user.name}}: {{text}}</p>
+      <p>{{createdAt}}</p>
+      <h4>Liked by</h4>
+      {{#likes}}
+      <ul>
+        <li>{{user.name}}</li>
+      </ul>
+      {{/likes}}
+    {{/model}}
   </body>
 </html>

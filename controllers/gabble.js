@@ -44,13 +44,23 @@ module.exports = {
 
     models.Gab.findOne({
       where: {
-        id: req.params.id
+        id: req.body.id
       }
     }).then(function(gab) {
-      models.Gab.addLikes(gab);
-      console.log('trying to add like');
+      // userGabs.setLikes(gab);
+      console.log('trying to add like to userGabs table');
+      var context = {
+        model: gab,
+        name: req.session.name,
+        loggedIn: true,
+        signedIn: true,
+      };
+      res.render('likes', context);
     });
-    res.redirect('/gabhome');
+  },
+  displayLikes: function (req, res) {
+    var context = {};
+    res.render('likes', context);
   }
 };
 

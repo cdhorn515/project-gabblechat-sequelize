@@ -1,20 +1,29 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>Layout</title>
+    <link rel="stylesheet" href="/static/styles.css">
+
   </head>
   <body>
     <header>
+
       <ul>
-        <li>Gabble</li>
-        <li>Create a new Gab</li>
+        <span>
+        <li id="home"><a href="#">Gabble</a></li>
+        <li id="create"><a href="#">Create a new Gab</a></li>
         <!--loggedIn should be boolean  -->
-        <li>{{loggedIn}} {{name}}</li>
+        {{#loggedIn}}
+        <li id="user"><a href="#">Logged in as {{name}}</a></li>
+          {{/loggedIn}}
         <!-- signedIn should be boolean -->
-        <li>{{signedIn}}</li>
+        {{#signedIn}}<li id="logOut"><a href="#">Log out</a></li>{{/signedIn}}
+      {{^signedIn}}<li id="logIn"><a href="#">Log in</a></li>{{/signedIn}}
+    </span>
       </ul>
+
     </header>
+
   </body>
 </html>
