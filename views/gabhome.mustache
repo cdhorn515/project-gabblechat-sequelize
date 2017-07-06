@@ -38,7 +38,7 @@
 
 {{#model}}
 <fieldset class="section">
-<form class="" action="/likes/:{{id}}" method="post">
+<form class="" action="/likes/{{id}}" method="post">
   <p>{{user.name}}: {{text}}
   <span>
     <input type="submit" name="like" value="like" id="{{id}}">
@@ -56,7 +56,7 @@
   {{/likes}}
     <span>
       {{#loggedIn}}
-      <form class="" action="/delete/:{{id}}" method="post">
+      <form class="" action="/delete/{{id}}" method="post">
       <input type="submit" name="like" value="Delete" id="{{id}}">
     </form>
 

@@ -86,6 +86,7 @@ module.exports = {
     });
   },
   deletePost: function (req,res) {
+
       models.Gab.destroy({
         where: {
           id: req.params.id
@@ -97,7 +98,7 @@ module.exports = {
           loggedIn: true,
           signedIn: true
         };
-        res.render('gabhome', context);
+        res.redirect('/gabhome');
     });
   }
 };
