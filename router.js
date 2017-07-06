@@ -16,18 +16,16 @@ router.post('/signup', userController.createUser);
 router.get('/login', userController.loginLanding);
 router.post('/login', userController.login);
 
-router.post('/gabhome/:id', gabbleController.likePost);
-router.get('/gabhome/:id', gabbleController.likePost);
-
 router.post('/gabhome', gabbleController.landing);
 router.get('/gabhome', gabbleController.landing);
 
-// router.post('/creategabland', gabbleController.createPostLanding);
-// router.get('/creategabland', gabbleController.createPostLanding);
+router.post('/gabhome/:id', gabbleController.likePost);
+// router.get('/gabhome/:id', gabbleController.likePost);
 
 router.post('/creategab', gabbleController.createPost);
 
-router.post('/likes/:id', gabbleController.likePost);
+router.post('/likes/:id', gabbleController.displayLikes);
 
+router.post('/delete/:id', gabbleController.deletePost);
 
 };

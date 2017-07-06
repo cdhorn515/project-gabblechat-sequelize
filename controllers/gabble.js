@@ -52,10 +52,10 @@ module.exports = {
 
     models.Gab.findOne({
       where: {
-        id: req.body.id
+        id: req.params.id
       }
     }).then(function(gab) {
-      Gab.setUserLikes(gab);
+      models.Gab.setUserLikes(gab);
       console.log('trying to add like to userGabs table');
       var context = {
         model: gab,
@@ -70,15 +70,25 @@ module.exports = {
     var context = {};
     models.Gab.getUserLikes({
       where: {
-        gabId: req.body.id
+        gabId: req.params.id
       }
+
+    }).then(function(){
+      var context = {
+        name: req.session.name,
+        loggedIn: true,
+        signedIn: true
+      };
+      req.session.gabId = gabId;
+
+      res.render('likes', context);
+
     });
-    res.render('likes', context);
   },
   deletePost: function (req,res) {
       models.Gab.destroy({
         where: {
-          id: req.body.id
+          id: req.params.id
         }
       }).then(function(){
         console.log('removed gab #', req.body.id);
