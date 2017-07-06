@@ -9,19 +9,31 @@
   <body>
     <header>
 
-      <ul>
-        <span>
-        <li>Gabble</li>
-        <li>Create a new Gab</li>
-        <!--loggedIn should be boolean  -->
-        {{#loggedIn}}
-        <li>Logged in as {{name}}</li>
-          {{/loggedIn}}
-        <!-- signedIn should be boolean -->
-        {{#signedIn}}<li>Log out</li>{{/signedIn}}
-      {{^signedIn}}<li>Log in</li>{{/signedIn}}
-    </span>
-      </ul>
+      <form class="" action="/gabhome" method="post">
+        <input type="submit" name="" value="Gabble">
+      </form>
+
+      <form class="" action="/creategab" method="post">
+        <input type="submit" name="" value="Create a new Gab">
+      </form>
+
+      {{#name}}
+        <form class="" action="/signup" method="post">
+          <input type="submit" name="" value="Logged in as {{name}}">
+        </form>
+      {{/name}}
+
+      {{#signedIn}}
+        <form class="" action="/login" method="post">
+          <input type="submit" name="" value="Log out">
+        </form>
+      {{/signedIn}}
+
+      {{^signedIn}}
+      <form class="" action="/login" method="post">
+        <input type="submit" name="" value="Log in">
+      </form>
+      {{/signedIn}}
 
     </header>
 

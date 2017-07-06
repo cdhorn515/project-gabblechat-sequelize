@@ -25,6 +25,14 @@ module.exports = {
         res.render('gabhome', context);
       });
   },
+  createPostLanding: function(req, res){
+    var context = {
+      name: req.session.name,
+      loggedIn: true,
+      signedIn: true
+    };
+    res.render('creategab', context);
+  },
   createPost: function (req, res){
       // if(result.notEmpty()) {
         models.Gab.create({
@@ -36,7 +44,7 @@ module.exports = {
         var context = {
           message: "uploaded new gab"
         };
-        res.render('gabhome', context);
+        res.render('creategab', context);
       });
     // }
   },
@@ -47,7 +55,7 @@ module.exports = {
         id: req.body.id
       }
     }).then(function(gab) {
-      // userGabs.setLikes(gab);
+      Gab.setUserLikes(gab);
       console.log('trying to add like to userGabs table');
       var context = {
         model: gab,
@@ -60,7 +68,27 @@ module.exports = {
   },
   displayLikes: function (req, res) {
     var context = {};
+    models.Gab.getUserLikes({
+      where: {
+        gabId: req.body.id
+      }
+    });
     res.render('likes', context);
+  },
+  deletePost: function (req,res) {
+      models.Gab.destroy({
+        where: {
+          id: req.body.id
+        }
+      }).then(function(){
+        console.log('removed gab #', req.body.id);
+        var context = {
+          name: req.session.name,
+          loggedIn: true,
+          signedIn: true
+        };
+        res.render('gabhome', context);
+    });
   }
 };
 

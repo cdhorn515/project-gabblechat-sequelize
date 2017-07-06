@@ -4,6 +4,14 @@ module.exports = function(sequelize, DataTypes) {
     text: {
       type: DataTypes.STRING,
       max: 140
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Users',
+        key: 'id'
+      }
     }
   }, {});
 
@@ -12,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
         as: 'user',
         foreignKey: 'userId'
       });
-      Gab.belongsToMany(models.User, {as: 'likes', through: 'userGabs', foreignKey: 'gabId'});
+      Gab.belongsToMany(models.User, {as: 'UserLikes', through: 'userGabs', foreignKey: 'gabId'});
     };
     return Gab;
   };

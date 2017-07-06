@@ -11,6 +11,7 @@ module.exports = {
   //   res.render('signup', context);
   // },
   landing: function(req, res) {
+    req.session.user='';
     var context = {
       loggedIn: false,
       signedIn: false
@@ -52,11 +53,13 @@ module.exports = {
       loggedIn: false,
       signedIn: false
     };
-    req.session = '';
     res.render('login', context);
   },
   login: function(req, res) {
-    var context = {};
+    var context = {
+      loggedIn: false,
+      signedIn: false
+    };
     //pull data from page entry
     var name = req.body.name;
     var password = req.body.password;
