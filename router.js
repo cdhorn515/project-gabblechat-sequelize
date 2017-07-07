@@ -19,12 +19,13 @@ router.post('/login', userController.login);
 router.post('/gabhome', gabbleController.landing);
 router.get('/gabhome', gabbleController.landing);
 
-router.post('/gabhome/:id', gabbleController.likePost);
+// router.post('/gabhome/:id', gabbleController.likePost);
 // router.get('/gabhome/:id', gabbleController.likePost);
 
 router.get('/creategab', gabbleController.createPostLanding);
 router.post('/creategab', gabbleController.createPost);
 
+router.get('/likes/:id', gabbleController.likePost);
 router.post('/likes/:id', gabbleController.displayLikes);
 
 router.post('/delete/:id', gabbleController.deletePost);

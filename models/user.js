@@ -3,15 +3,9 @@ module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
     name: {
       type: DataTypes.STRING,
-      unique: {
-        args: true,
-        msg: 'Someone took that name already, please choose another'
-      },
+      unique: true,
       allowNull: false,
       validate: {
-        notEmpty: {
-          msg: 'Oops! Looks like you forgot to enter some information!'
-        },
         isAlpha: {
           msg: 'Unless you\'re from another planet, your name should only contain letters'
         }

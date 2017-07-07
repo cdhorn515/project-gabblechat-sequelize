@@ -22,5 +22,16 @@ module.exports = function(sequelize, DataTypes) {
       });
       Gab.belongsToMany(models.User, {as: 'UserLikes', through: 'userGabs', foreignKey: 'gabId'});
     };
+
+    Gab.prototype.showDeleteIfOwner = function() {
+      return function (val, render) {
+        const id = render(val);
+        if (id == this.userId) {
+          // render the delete button
+        return render(` <form class="" action="/delete/{{id}}" method="post">
+          <input type="submit" name="like" value="Delete" id="{{id}}">  </form>`);
+              }
+      };
+    };
     return Gab;
   };

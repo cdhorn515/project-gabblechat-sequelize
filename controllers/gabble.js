@@ -26,6 +26,7 @@ module.exports = {
           loggedIn: true,
           name: req.session.name,
           signedIn: true,
+          loggedInUser: req.session.userId
           // deleteButton: req.session.deleteButton
         };
         console.log("gabble line 24", req.session.name);
@@ -56,22 +57,24 @@ module.exports = {
     // }
   },
   likePost: function (req, res){
-  //
-  //   models.Gab.findOne({
-  //     where: {
-  //       id: req.params.id
-  //     }
-  //   }).then(function(gab) {
-  //     // models.User.setUserLikes(gab);
-  //     console.log('trying to add like to userGabs table');
-  //     var context = {
-  //       model: gab,
-  //       name: req.session.name,
-  //       loggedIn: true,
-  //       signedIn: true,
-      // };
-      res.render('likes');
 
+    models.Gab.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(gab) {
+
+      // Gab.setUserLikes();
+      console.log('in likePost trying to add like to userGabs table for like # ', req.params.id);
+      // console.log('userlikes ', UserLikes);
+      var context = {
+        model: gab,
+        name: req.session.name,
+        loggedIn: true,
+        signedIn: true,
+      };
+      res.render('likes');
+ });
   },
   displayLikes: function (req, res) {
     models.Gab.findOne({
@@ -104,7 +107,8 @@ module.exports = {
 
       models.Gab.destroy({
         where: {
-          id: req.params.id
+          id: req.params.id,
+          userid: req.session.userId
         }
       }).then(function(){
         console.log('removed gab #', req.body.id);
