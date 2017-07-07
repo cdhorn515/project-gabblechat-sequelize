@@ -22,6 +22,7 @@ router.get('/gabhome', gabbleController.landing);
 router.post('/gabhome/:id', gabbleController.likePost);
 // router.get('/gabhome/:id', gabbleController.likePost);
 
+router.get('/creategab', gabbleController.createPostLanding);
 router.post('/creategab', gabbleController.createPost);
 
 router.post('/likes/:id', gabbleController.displayLikes);

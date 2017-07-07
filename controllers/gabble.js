@@ -1,6 +1,5 @@
 
 const models = require('../models'),
-      // Gab =
       session = require('express-session');
 
 module.exports = {
@@ -14,20 +13,21 @@ module.exports = {
         ],
           order:
             [['createdAt', 'DESC']]
-          
+
       }).then(function(gabs){
-        //   if(models.User.id === req.session.id){
-        //     req.session.deleteButton = true;
+          // console.log("here", gabs.user);
+          // console.log(req.session.name);
+          //   if(models.user.name === req.session.name){
+          //     req.session.deleteButton = true;
         // }
+
         var context = {
           model: gabs,
           loggedIn: true,
           name: req.session.name,
           signedIn: true,
-          deleteButton: req.session.deleteButton
+          // deleteButton: req.session.deleteButton
         };
-        //this shows as undefined
-        // console.log('gab.text', gab.text);
         console.log("gabble line 24", req.session.name);
         res.render('gabhome', context);
       });
@@ -56,37 +56,45 @@ module.exports = {
     // }
   },
   likePost: function (req, res){
+  //
+  //   models.Gab.findOne({
+  //     where: {
+  //       id: req.params.id
+  //     }
+  //   }).then(function(gab) {
+  //     // models.User.setUserLikes(gab);
+  //     console.log('trying to add like to userGabs table');
+  //     var context = {
+  //       model: gab,
+  //       name: req.session.name,
+  //       loggedIn: true,
+  //       signedIn: true,
+      // };
+      res.render('likes');
 
+  },
+  displayLikes: function (req, res) {
     models.Gab.findOne({
       where: {
         id: req.params.id
-      }
+      },
+      include: [
+        {
+          model: models.User,
+          as: 'user'
+        }
+      ],
     }).then(function(gab) {
-      // models.Gab.setUserLikes(gab);
+      // models.User.setUserLikes(gab);
       console.log('trying to add like to userGabs table');
       var context = {
         model: gab,
         name: req.session.name,
         loggedIn: true,
         signedIn: true,
+        id: req.params.id
       };
-      res.render('likes', context);
-    });
-  },
-  displayLikes: function (req, res) {
-    var context = {};
-    getUserLikes({
-      where: {
-        gabId: req.params.id
-      }
-
-    }).then(function(){
-      var context = {
-        name: req.session.name,
-        loggedIn: true,
-        signedIn: true
-      };
-      req.session.gabId = gabId;
+      // req.session.gabId = gabId;
 
       res.render('likes', context);
 

@@ -8,28 +8,28 @@
   <body>
     <header>
 
-        <form class="" action="/gabhome" method="post">
+        <form class="" action="/gabhome" method="get">
           <input type="submit" name="" value="Gabble">
         </form>
 
-        <form class="" action="/creategab" method="post">
+        <form class="" action="/creategab" method="get">
           <input type="submit" name="" value="Create a new Gab">
         </form>
 
         {{#name}}
-          <form class="" action="/signup" method="post">
+          <form class="" action="/signup" method="get">
             <input type="submit" name="" value="Logged in as {{name}}">
           </form>
         {{/name}}
 
         {{#signedIn}}
-          <form class="" action="/login" method="post">
+          <form class="" action="/login" method="get">
             <input type="submit" name="" value="Log out">
           </form>
         {{/signedIn}}
 
         {{^signedIn}}
-        <form class="" action="/login" method="post">
+        <form class="" action="/login" method="get">
           <input type="submit" name="" value="Log in">
         </form>
         {{/signedIn}}
@@ -57,12 +57,13 @@
 
     <span>
 
-      {{#deleteButton}}
+
       <form class="" action="/delete/{{id}}" method="post">
       <input type="submit" name="like" value="Delete" id="{{id}}">
     </form>
-      {{/deleteButton}}
-      
+
+    
+
     </span>
   </p>
 </fieldset>
