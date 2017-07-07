@@ -54,13 +54,15 @@
   {{^likes}}
   <p>No likes yet
   {{/likes}}
+
     <span>
-      {{#loggedIn}}
+
+      {{#deleteButton}}
       <form class="" action="/delete/{{id}}" method="post">
       <input type="submit" name="like" value="Delete" id="{{id}}">
     </form>
-
-      {{/loggedIn}}
+      {{/deleteButton}}
+      
     </span>
   </p>
 </fieldset>

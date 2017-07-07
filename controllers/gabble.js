@@ -11,13 +11,20 @@ module.exports = {
             model: models.User,
             as: 'user'
           }
-        ]
+        ],
+          order:
+            [['createdAt', 'DESC']]
+          
       }).then(function(gabs){
+        //   if(models.User.id === req.session.id){
+        //     req.session.deleteButton = true;
+        // }
         var context = {
           model: gabs,
           loggedIn: true,
           name: req.session.name,
-          signedIn: true
+          signedIn: true,
+          deleteButton: req.session.deleteButton
         };
         //this shows as undefined
         // console.log('gab.text', gab.text);
