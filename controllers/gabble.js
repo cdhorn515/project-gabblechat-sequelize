@@ -55,7 +55,7 @@ module.exports = {
         id: req.params.id
       }
     }).then(function(gab) {
-      models.Gab.setUserLikes(gab);
+      // models.Gab.setUserLikes(gab);
       console.log('trying to add like to userGabs table');
       var context = {
         model: gab,
@@ -68,7 +68,7 @@ module.exports = {
   },
   displayLikes: function (req, res) {
     var context = {};
-    models.Gab.getUserLikes({
+    getUserLikes({
       where: {
         gabId: req.params.id
       }

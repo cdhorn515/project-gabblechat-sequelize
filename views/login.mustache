@@ -25,13 +25,13 @@
   {{/name}}
 
   {{#signedIn}}
-    <form class="" action="/login" method="post">
+    <form class="" action="/login" method="get">
       <input type="submit" name="" value="Log out">
     </form>
   {{/signedIn}}
 
   {{^signedIn}}
-  <form class="" action="/login" method="post">
+  <form class="" action="/login" method="get">
     <input type="submit" name="" value="Log in">
   </form>
   {{/signedIn}}
@@ -48,8 +48,12 @@
       <label for="">Password</label>
       <input type="password" name="password" value="">
     </div>
-
     <input type="submit" name="" value="Enter">
+  </form>
+
+  <h4>Don't have a username? Click here to sign up!</h4>
+  <form class="" action="/signup" method="get">
+    <input type="submit" name="" value="Sign up">
   </form>
 
 </body>

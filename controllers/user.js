@@ -1,3 +1,4 @@
+
 const models = require('../models');
 const Sequelize = require('sequelize');
 // console.log('here ', models);
@@ -51,14 +52,16 @@ module.exports = {
   loginLanding: function(req, res) {
     var context = {
       loggedIn: false,
-      signedIn: false
+      signedIn: false,
+      loginPage: true
     };
     res.render('login', context);
   },
   login: function(req, res) {
     var context = {
       loggedIn: false,
-      signedIn: false
+      signedIn: false,
+      loginPage: true
     };
     //pull data from page entry
     var name = req.body.name;
