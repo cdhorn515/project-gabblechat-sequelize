@@ -73,7 +73,7 @@ module.exports = {
 }).then(function(gabs){
   console.log('FINDING GAB TO DISPLAY ', gabs);
   //haven't checked this yet
-  gabs.getUserLikes(user).then(function(results){
+  gabs.getUserLikes().then(function(){
     console.log("number of likes? ", results.length);
     var context = {
       model: gabs,
@@ -89,36 +89,6 @@ module.exports = {
 
 });
 
-    // var gab = models.Gab.findAll().then(function(gabs){
-    //   gab.getUserLikes();
-        // console.log("HERE ", getUserLikes);
-
-    // });
-
-    // models.Gab.findOne({
-    //   where: {
-    //     id: req.params.id
-    //   },
-    //   include: [{
-    //     model: models.User,
-    //     as: 'user'
-    //   }],
-    // }).then(function(gab) {
-    //   // models.User.setUserLikes(gab);
-    //   console.log(req.session.user);
-    //   gab.getUserLikes(req.session.userId);
-    //
-    //   console.log('trying to add like to userGabs table');
-    //   var context = {
-    //     model: gab,
-    //     name: req.session.name,
-    //     loggedIn: true,
-    //     signedIn: true,
-    //     id: req.params.id
-    //   };
-      // req.session.gabId = gabId;
-
-      // res.render('likes', context);
 
   },
   deletePost: function(req, res) {
@@ -135,9 +105,40 @@ module.exports = {
 
      gab.destroy();
    });
-  }
+
+}
 };
 
+// var gab = models.Gab.findAll().then(function(gabs){
+//   gab.getUserLikes();
+    // console.log("HERE ", getUserLikes);
+
+// });
+
+// models.Gab.findOne({
+//   where: {
+//     id: req.params.id
+//   },
+//   include: [{
+//     model: models.User,
+//     as: 'user'
+//   }],
+// }).then(function(gab) {
+//   // models.User.setUserLikes(gab);
+//   console.log(req.session.user);
+//   gab.getUserLikes(req.session.userId);
+//
+//   console.log('trying to add like to userGabs table');
+//   var context = {
+//     model: gab,
+//     name: req.session.name,
+//     loggedIn: true,
+//     signedIn: true,
+//     id: req.params.id
+//   };
+  // req.session.gabId = gabId;
+
+  // res.render('likes', context);
 /*
 models.Gab.findOne({
   where: {
