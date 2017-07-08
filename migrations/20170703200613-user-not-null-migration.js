@@ -7,14 +7,11 @@ module.exports = {
           'name',
           {
             type: Sequelize.STRING,
-            unique: {
-              args: true,
-              msg: 'Someone took that name already, please choose another'
-            },
+            unique: true,
             allowNull: false,
             validate: {
-              notEmpty: {
-                msg: 'Oops! Looks like you forgot to enter some information!'
+              isAlpha: {
+                msg: 'Unless you are from another galaxy you\'re name should only have letters'
               }
             }
           },

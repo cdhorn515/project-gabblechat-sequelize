@@ -24,12 +24,22 @@ module.exports = {
           model: 'Gabs',
           key: 'id'
         }
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAd: {
+       allowNull: false,
+       type: Sequelize.DATE
       }
     });
 
   },
 
   down: function (queryInterface, Sequelize) {
-    return queryInterface.dropTable('userGabs');
+    return queryInterface.dropTable(
+      'userGabs'
+    );
   }
 };
