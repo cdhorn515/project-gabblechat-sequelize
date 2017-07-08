@@ -13,11 +13,6 @@ module.exports = {
       ]
 
     }).then(function(gabs) {
-      // console.log("here", gabs.user);
-      // console.log(req.session.name);
-      //   if(models.user.name === req.session.name){
-      //     req.session.deleteButton = true;
-      // }
 
       var context = {
         model: gabs,
@@ -25,9 +20,7 @@ module.exports = {
         name: req.session.name,
         signedIn: true,
         loggedInUser: req.session.userId
-        // deleteButton: req.session.deleteButton
       };
-      console.log("gabble line 24", req.session.name);
       res.render('gabhome', context);
     });
   },
@@ -46,7 +39,6 @@ module.exports = {
       userId: req.session.userId
     }).then(function(newGab) {
       req.session.gabId = newGab.id;
-      console.log("gabble line 28 ", newGab.id);
       var context = {
         message: "uploaded new gab"
       };
@@ -54,88 +46,127 @@ module.exports = {
     });
     // }
   },
-  //  likePost: function (req, res){
-  //
-  //    models.Gab.findOne({
-  //      where: {
-  //        id: req.params.id
-  //      }
-  //    }).then(function(gab) {
-  //      console.log('here', req.params.id);
-  //      gab.setUserLikes();
-  //      console.log('in likePost trying to add like to userGabs table for like # ', req.params.id);
-  //      console.log('userlikes ', UserLikes);
-  //      var context = {
-  //        model: gab,
-  //        name: req.session.name,
-  //        loggedIn: true,
-  //        signedIn: true,
-  //      };
-  //      res.render('likes');
-  // });
-  //  },
+   likePost: function (req, res){
+     models.Gab.findOne({
+       where: {
+         id: req.params.id
+       }
+     }
+      ).then(function(gab) {
+       // models.User.setUserLikes(gab);
+       console.log('firing', req.session.user);
+       gab.addUserLikes(req.session.userId);
+       res.redirect('/gabhome');
+     });
+     },
+
   displayLikes: function(req, res) {
-    models.Gab.findOne({
+
+    models.Gab.findAll({
       where: {
         id: req.params.id
       },
-      include: [{
-        model: models.User,
-        as: 'user'
-      }],
-    }).then(function(gab) {
-      // models.User.setUserLikes(gab);
-      console.log(req.session.user);
-      gab.setUserLikes(req.session.userId);
+        include: [{
+          model: models.User,
+          as: 'user'
+        }],
+}).then(function(gabs){
+  console.log('FINDING GAB TO DISPLAY ', gabs);
+  //haven't checked this yet
+  gabs.getUserLikes(user).then(function(results){
+    console.log("number of likes? ", results.length);
+    var context = {
+      model: gabs,
+      name: req.session.name,
+      loggedIn: true,
+      signedIn: true,
+      likes: true
+    };
+    res.render('likes', context);
 
-      console.log('trying to add like to userGabs table');
-      var context = {
-        model: gab,
-        name: req.session.name,
-        loggedIn: true,
-        signedIn: true,
-        id: req.params.id
-      };
+  });
+
+
+});
+
+    // var gab = models.Gab.findAll().then(function(gabs){
+    //   gab.getUserLikes();
+        // console.log("HERE ", getUserLikes);
+
+    // });
+
+    // models.Gab.findOne({
+    //   where: {
+    //     id: req.params.id
+    //   },
+    //   include: [{
+    //     model: models.User,
+    //     as: 'user'
+    //   }],
+    // }).then(function(gab) {
+    //   // models.User.setUserLikes(gab);
+    //   console.log(req.session.user);
+    //   gab.getUserLikes(req.session.userId);
+    //
+    //   console.log('trying to add like to userGabs table');
+    //   var context = {
+    //     model: gab,
+    //     name: req.session.name,
+    //     loggedIn: true,
+    //     signedIn: true,
+    //     id: req.params.id
+    //   };
       // req.session.gabId = gabId;
 
-      res.render('likes', context);
-    });
+      // res.render('likes', context);
+
   },
   deletePost: function(req, res) {
+   models.Gab.findOne({
+     where: {
+       id: req.params.id
+     },
+     include: [{
+       model: 'user',
+       through: 'UserGabs'
+     }]
+   }).then(function(gab){
+     console.log(gab);
 
-    models.Gab.destroy({
-      where: {
-        id: req.params.id,
-        userid: req.session.userId
-      }
-    }).then(function() {
-      console.log('removed gab #', req.body.id);
-      var context = {
-        name: req.session.name,
-        loggedIn: true,
-        signedIn: true
-      };
-      res.redirect('/gabhome');
-    });
+     gab.destroy();
+   });
   }
 };
 
-
 /*
-models.userGabs.create({
-  userId: req.session.userId,
-  gabId: req.params.id
-}).then(function(userGabs){
-  req.session.userGabsId = userGabs.id;
-  console.log('usergab id ', userGabs.id);
-  console.log(userId + ' added like to post ' + gabId);
-  console.log("this is like # ", req.session.userGabsId);
-});
-*/
-//not sure this is correct, remove for now
-/*
+models.Gab.findOne({
+  where: {
+    id: req.params.id,
+    userId: req.session.userId
+  }
+}).then(function(gab){
+  gab.getGabLikes.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(function(gab){
+    console.log(GabLikes);
+  });
+},
+models.Gab.destroy({
+  where: {
+    id: req.params.id,
+    userId: req.session.userId
+  }
+}).then(function() {
+  console.log('removed gab #', req.body.id);
+  res.redirect('/gabhome');
+})
+);
 
 */
+
+
 /*
 models.Gab.findAll({
   include: [

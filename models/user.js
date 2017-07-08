@@ -6,9 +6,7 @@ module.exports = function(sequelize, DataTypes) {
       unique: true,
       allowNull: false,
       validate: {
-        isAlpha: {
-          msg: 'Unless you\'re from another planet, your name should only contain letters'
-        }
+        isAlpha: true
       }
     },
       password: {

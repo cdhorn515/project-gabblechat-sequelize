@@ -33,14 +33,12 @@
           <input type="submit" name="" value="Log in">
         </form>
         {{/signedIn}}
-
     </header>
 
 {{#model}}
 
-
 <fieldset class="section">
-<form class="" action="/likes/{{id}}" method="get">
+<form class="" action="/addLikes/{{id}}" method="get">
   <p>{{user.name}}: {{text}}
   <span>
     <input type="submit" name="like" value="like" id="{{id}}">
@@ -50,17 +48,21 @@
   <p>{{createdAt}}
   </p>
   {{#likes}}
-  <p>{{numberOfLikes}} like
+  <form class="numOfLikes" action="/likes/{{id}}" method="get">
+    <input type="submit" name="" value="{{numberOfLikes}} like(s)" id="{{id}}">
+  </form>
   {{/likes}}
   {{^likes}}
-  <p>No likes yet
+      <span>
+  <form class="numOfLikes" action="/viewLikes/{{id}}" method="get">
+    <input type="submit" name="" value="no likes yet" id="{{id}}">
+  </form>
   {{/likes}}
 
-    <span>
+
       {{#showDeleteIfOwner}}
       {{loggedInUser}}
       {{/showDeleteIfOwner}}
     </span>
-  </p>
 </fieldset>
 {{/model}}
