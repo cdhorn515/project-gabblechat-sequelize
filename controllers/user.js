@@ -47,6 +47,7 @@ module.exports = {
         };
         res.render('signup', context);
       });
+      res.redirect('/login');
     },
 
   loginLanding: function(req, res) {
