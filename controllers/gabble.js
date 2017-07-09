@@ -83,13 +83,8 @@ module.exports = {
       likes: true
     };
     res.render('likes', context);
-
   });
-
-
 });
-
-
   },
   deletePost: function(req, res) {
    models.Gab.findOne({
