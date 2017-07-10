@@ -48,17 +48,17 @@
 </p>
   <p>{{createdAt}}
   </p>
-  {{#likes}}
+{{#UserLikes.length}}
   <form class="numOfLikes" action="/likes/{{id}}" method="get">
-    <input type="submit" name="" value="{{likes}} like(s)" id="{{id}}">
+    <input type="submit" name="" value="{{.}} like(s)" id="{{id}}">
   </form>
-  {{/likes}}
-  {{^likes}}
+{{/UserLikes.length}}
+  {{^UserLikes.length}}
       <span>
   <form class="numOfLikes" action="/viewLikes/{{id}}" method="get">
     <input type="submit" name="" value="no likes yet" id="{{id}}">
   </form>
-  {{/likes}}
+  {{/UserLikes.length}}
 
 
       {{#showDeleteIfOwner}}

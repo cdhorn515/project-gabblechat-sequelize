@@ -14,36 +14,15 @@ module.exports = {
       include: [{
         model: models.User,
         as: 'user'
-      }],
+      }, 'UserLikes'],
       order: [
         ['createdAt', 'DESC']
       ]
     }).then(function(gabs) {
       context.model = gabs;
-      gabs.forEach(function(gab){
-        var gabInfo={};
-        console.log('hi');
-        gab.getUserLikes().then(function(result){
-          gabInfo = {
-            gab: gab,
-            likes: result.length
-          };
-          console.log("gabinfo ",gabInfo);
-          context.modelArray.push(gabInfo);
-
-          // context.modelArray = [{
-          //   model: gab,
-          //   likes: result.length
-          // }];
-          console.log("MODEL ARRAY WORKING");
-          console.log("context ", context);
-          context.likes = result.length;
-          console.log('likes', context.likes);
-        });
-      });
+      console.log(context.modelArray);
       res.render('gabhome', context);
     });
-    // gabs.forEach(function(gabs){
   },
   createPostLanding: function(req, res) {
     var context = {
@@ -54,7 +33,6 @@ module.exports = {
     res.render('creategab', context);
   },
   createPost: function(req, res) {
-    // if(result.notEmpty()) {
     models.Gab.create({
       text: req.body.gab,
       userId: req.session.userId
@@ -100,7 +78,7 @@ module.exports = {
           likes: []
         };
         for (var i = 0; i < result.length; i++) {
-          
+
           console.log(result[i].name);
           context.likes.push(result[i].name);
           // console.log("LIKES ", context.likes);
@@ -121,7 +99,7 @@ module.exports = {
             // }],
     }).then(function(gab){
       console.log('FINDING GAB TO DELETE ', gab);
-    //   //haven't checked this yet
+    //?
        gab.getUserLikes(req.params.id).then(function(){
         console.log("gab to delete? ", gab);
     res.redirect('/gabhome');

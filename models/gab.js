@@ -1,6 +1,7 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var Gab = sequelize.define('Gab', {
+    likeCount: DataTypes.VIRTUAL,
     text: {
       type: DataTypes.STRING,
       max: 140
