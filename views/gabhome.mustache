@@ -35,8 +35,8 @@
         {{/signedIn}}
     </header>
 
-{{#model}}
 
+{{#model}}
 <fieldset class="section">
 <form class="" action="/addLikes/{{id}}" method="get">
   <p>{{user.name}}: {{text}}
@@ -49,7 +49,7 @@
   </p>
   {{#likes}}
   <form class="numOfLikes" action="/likes/{{id}}" method="get">
-    <input type="submit" name="" value="{{numberOfLikes}} like(s)" id="{{id}}">
+    <input type="submit" name="" value="{{.}} like(s)" id="{{id}}">
   </form>
   {{/likes}}
   {{^likes}}

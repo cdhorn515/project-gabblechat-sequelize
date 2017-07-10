@@ -8,44 +8,47 @@
   </head>
   <body>
     <header>
-
       <form class="" action="/gabhome" method="get">
         <input type="submit" name="" value="Gabble">
       </form>
-
       <form class="" action="/creategab" method="get">
         <input type="submit" name="" value="Create a new Gab">
       </form>
-
       {{#name}}
         <form class="" action="/signup" method="get">
           <input type="submit" name="" value="Logged in as {{name}}">
         </form>
       {{/name}}
-
       {{#signedIn}}
         <form class="" action="/login" method="get">
           <input type="submit" name="" value="Log out">
         </form>
       {{/signedIn}}
-
       {{^signedIn}}
       <form class="" action="/login" method="get">
         <input type="submit" name="" value="Log in">
       </form>
       {{/signedIn}}
-
     </header>
 
     {{#model}}
+
       <p>{{user.name}}: {{text}}</p>
       <p>{{createdAt}}</p>
       <h4>Liked by</h4>
+    {{/model}}
+  {{#modelArray}}
       {{#likes}}
       <ul>
-        <li>{{user.name}}</li>
+
+        <li class="likedBy">{{.}}</li>
+
       </ul>
       {{/likes}}
-    {{/model}}
+
+      {{^likes}}
+      <p>No likes yet</p>
+      {{/likes}}
+{{/modelArray}}
   </body>
 </html>

@@ -28,6 +28,6 @@ router.post('/creategab', gabbleController.createPost);
 router.get('/addLikes/:id', gabbleController.likePost);
 router.get('/viewLikes/:id', gabbleController.displayLikes);
 
-router.post('/delete/:id', gabbleController.deletePost);
+router.get('/delete/:id', gabbleController.deletePost);
 
 };

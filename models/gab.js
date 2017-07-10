@@ -28,7 +28,7 @@ module.exports = function(sequelize, DataTypes) {
         const id = render(val);
         if (id == this.userId) {
           // render the delete button
-        return render(` <form class="" action="/delete/{{id}}" method="post">
+        return render(` <form class="" action="/delete/{{id}}" method="get">
           <input type="submit" name="like" value="Delete" id="{{id}}">  </form>`);
               }
       };
