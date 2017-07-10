@@ -100,8 +100,10 @@ module.exports = {
           likes: []
         };
         for (var i = 0; i < result.length; i++) {
-          context.likes.push(result.name);
-          console.log(result.name);
+          
+          console.log(result[i].name);
+          context.likes.push(result[i].name);
+          // console.log("LIKES ", context.likes);
         }
         res.render('likes', context);
       });
@@ -109,26 +111,22 @@ module.exports = {
   },
   deletePost: function(req, res) {
 
-    //     models.Gab.findAll({
-    //       where: {
-    //         id: req.params.id
-    //       },
-    //         include: [{
-    //           model: models.User,
-    //           as: 'user'
-    //         }],
-    // }).then(function(gabs){
-    //   console.log('FINDING GAB TO DISPLAY ', gabs);
+        models.Gab.findOne({
+          where: {
+            id: req.params.id
+          }
+            // include: [{
+            //   model: models.User,
+            //   as: 'user'
+            // }],
+    }).then(function(gab){
+      console.log('FINDING GAB TO DELETE ', gab);
     //   //haven't checked this yet
-    //   gabs.getUserLikes().then(function(){
-    //     console.log("number of likes? ", results.length);
-
-
-    // res.render('likes');
-        //  gab.destroy();
-      //  });
-    // });
-
+       gab.getUserLikes(req.params.id).then(function(){
+        console.log("gab to delete? ", gab);
+    res.redirect('/gabhome');
+    });
+});
   }
 };
 
