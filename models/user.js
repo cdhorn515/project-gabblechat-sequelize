@@ -19,13 +19,13 @@ module.exports = function(sequelize, DataTypes) {
     User.hasMany(models.Gab, {
       as: 'Gabs',
       foreignKey: 'userId',
-      onDelete: 'CASCADE'
+      onDelete: 'cascade'
     });
     User.belongsToMany(models.Gab, {
       as: 'GabLikes',
       through: 'userGabs',
       foreignKey: 'userId',
-      onDelete: 'CASCADE'
+      onDelete: 'cascade'
     });
   };
   return User;

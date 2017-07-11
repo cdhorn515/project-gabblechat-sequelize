@@ -24,7 +24,7 @@ module.exports = {
         console.log('new userId ', req.session.userId);
         console.log('validating');
         req.session.name = req.body.name;
-        res.redirect('gabhome');
+        res.redirect('/login');
       }).catch(Sequelize.UniqueConstraintError, function(error){
         console.log('UNIQUE----------- ', error.message);
         var context = {

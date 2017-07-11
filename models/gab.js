@@ -20,9 +20,9 @@ module.exports = function(sequelize, DataTypes) {
       Gab.belongsTo(models.User, {
         as: 'user',
         foreignKey: 'userId',
-        onDelete: 'CASCADE'
+        onDelete: 'cascade'
       });
-      Gab.belongsToMany(models.User, {as: 'UserLikes', through: 'userGabs', foreignKey: 'gabId', onDelete: 'CASCADE'});
+      Gab.belongsToMany(models.User, {as: 'UserLikes', through: 'userGabs', foreignKey: 'gabId', onDelete: 'cascade'});
     };
 
     Gab.prototype.showDeleteIfOwner = function() {
@@ -31,7 +31,7 @@ module.exports = function(sequelize, DataTypes) {
         if (id == this.userId) {
           // render the delete button
         return render(` <form class="" action="/delete/{{id}}" method="get">
-          <input type="submit" name="delete" value="{{id}}" id="{{id}}">  </form>`);
+          <input type="submit" name="delete" value="Delete" id="{{id}}">  </form>`);
               }
       };
     };
