@@ -21,10 +21,11 @@ module.exports = {
         name: req.body.name,
         password: req.body.password
       }).then(function(newUser){
-        console.log('new userId ', req.session.userId);
+        console.log('new userId ', req.session.newUserId);
         console.log('validating');
+        req.session.userId = newUser.id;
         req.session.name = req.body.name;
-        res.redirect('/login');
+        res.redirect('/gabhome');
       }).catch(Sequelize.UniqueConstraintError, function(error){
         console.log('UNIQUE----------- ', error.message);
         var context = {
