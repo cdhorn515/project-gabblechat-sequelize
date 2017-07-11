@@ -18,12 +18,14 @@ module.exports = function(sequelize, DataTypes) {
   User.associate = function(models) {
     User.hasMany(models.Gab, {
       as: 'Gabs',
-      foreignKey: 'userId'
+      foreignKey: 'userId',
+      onDelete: 'CASCADE'
     });
     User.belongsToMany(models.Gab, {
       as: 'GabLikes',
       through: 'userGabs',
-      foreignKey: 'userId'
+      foreignKey: 'userId',
+      onDelete: 'CASCADE'
     });
   };
   return User;

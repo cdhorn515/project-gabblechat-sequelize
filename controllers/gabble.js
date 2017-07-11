@@ -88,25 +88,33 @@ module.exports = {
     });
   },
   deletePost: function(req, res) {
-
-        models.Gab.findOne({
-          where: {
-            id: req.params.id
-          }
-            // include: [{
-            //   model: models.User,
-            //   as: 'user'
-            // }],
-    }).then(function(gab){
-      console.log('FINDING GAB TO DELETE ', gab);
-    //?
-       gab.getUserLikes(req.params.id).then(function(){
-        console.log("gab to delete? ", gab);
-    res.redirect('/gabhome');
+    models.Gab.destroy({
+      where: {
+        id: req.params.id
+      }
     });
-});
+    res.redirect('/gabhome');
+// });
   }
 };
+
+//hang on to for now:
+///////////////////
+//     models.Gab.findOne({
+//       where: {
+//         id: req.params.id
+//       }
+//         // include: [{
+//         //   model: models.User,
+//         //   as: 'user'
+//         // }],
+// }).then(function(gab){
+//   console.log('FINDING GAB TO DELETE ', gab);
+// //?
+//   //  gab.getUserLikes(req.params.id).then(function(){
+//     console.log("gab to delete? ", gab);
+/////////////////
+
 
 // var gab = models.Gab.findAll().then(function(gabs){
 //   gab.getUserLikes();
