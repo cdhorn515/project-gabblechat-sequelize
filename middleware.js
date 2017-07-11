@@ -11,16 +11,17 @@ app.use(session({
 }));
 
 module.exports = {
-  /*
-  checkIfUser: function(req, res, next) {
-    var pathname = parseurl(req).pathname;
-    if (!req.session.userId && pathname != '/signup'){
-      res.render('login');
-    } else {
-      next();
-    }
-  }
-  */
+
+  // checkIfUser: function(req, res, next) {
+  //   var pathname = parseurl(req).pathname;
+  //   if (!req.session.userId && pathname != '/signup'){
+  //     req.session.error = 'test';
+  //     res.render('login');
+  //   } else {
+  //     next();
+  //   }
+  // }
+
     // checkUserId: function(req, res, next) {
     //   /*
     // FIX  where does this go? prob in controller?

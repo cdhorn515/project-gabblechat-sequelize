@@ -21,34 +21,27 @@ module.exports = {
         name: req.body.name,
         password: req.body.password
       }).then(function(newUser){
-        console.log('new userId ', req.session.newUserId);
-        console.log('validating');
+        // console.log('new userId ', req.session.newUserId);
+        // console.log('validating');
         req.session.userId = newUser.id;
         req.session.name = req.body.name;
         res.redirect('/gabhome');
       }).catch(Sequelize.UniqueConstraintError, function(error){
-        console.log('UNIQUE----------- ', error.message);
+        // console.log('UNIQUE----------- ', error.message);
         var context = {
           msg: "Someone's using that name already, please choose another"
         };
         res.render('signup', context);
 
       }).catch(Sequelize.ValidationError, function (error) {
-        console.log('VALIDATE----------- ', error.message);
+        // console.log('VALIDATE----------- ', error.message);
         var context = {
           msg: "Oops, something went wrong, please check your information and try again"
         };
         res.render('signup', context);
       });
     },
-    /*.catch(function(error){
-      console.log('oh no, something went wrong! ', error);
-      var context = {
-        msg: "oh no!"
-      };
-      res.render('signup', context);
-      return;
-    });*/
+
   loginLanding: function(req, res) {
     var context = {
       loggedIn: false,
