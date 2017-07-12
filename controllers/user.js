@@ -66,7 +66,14 @@ module.exports = {
       }
     }).then(function(user) {
       var password = req.body.password;
-
+      if(!user){
+        context = {
+          loggedIn: false,
+          signedIn: false,
+          msg: "Oops! You are not in our database, please complete the sign up form in order to create your account"
+       };
+       res.render('signup', context);
+     } else {
       //if match then pull database info and store in session
       if (password === user.password) {
         req.session.user = user;
@@ -77,17 +84,19 @@ module.exports = {
         console.log('user id is: ', req.session.userId);
         console.log('user name is: ', req.session.user.name);
         res.redirect('/gabhome');
-        return;
-      } else {
-         context = {
-          msg: "this user is not in our database, please complete the sign up form in order to create your account"
-        };
-        res.render('signup', context);
-      }
-    });
-  }
-};
 
+        // return;
+      // } else {
+      //    context = {
+      //     msg: "this user is not in our database, please complete the sign up form in order to create your account"
+      //   };
+      //   res.render('signup', context);
+      // }
+    }
+  }
+});
+}
+};
 /*
 if (!req.body.username || !req.body.password) {
   var context = {
