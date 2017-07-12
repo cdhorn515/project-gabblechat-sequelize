@@ -8,28 +8,32 @@
   </head>
   <body>
     <header>
-      <form class="" action="/gabhome" method="get">
+      <div class="navigation">
+
+      <form class="float" action="/gabhome" method="get">
         <input type="submit" name="" value="Gabble">
       </form>
-      <form class="" action="/creategab" method="get">
+      <form class="float" action="/creategab" method="get">
         <input type="submit" name="" value="Create a new Gab">
       </form>
       {{#name}}
-        <form class="" action="/signup" method="get">
+        <form class="float" action="/signup" method="get">
           <input type="submit" name="" value="Logged in as {{name}}">
         </form>
       {{/name}}
       {{#signedIn}}
-        <form class="" action="/login" method="get">
+        <form class="float" action="/login" method="get">
           <input type="submit" name="" value="Log out">
         </form>
       {{/signedIn}}
       {{^signedIn}}
-      <form class="" action="/login" method="get">
+      <form class="float" action="/login" method="get">
         <input type="submit" name="" value="Log in">
       </form>
       {{/signedIn}}
+    </div>
     </header>
+    <div class="clearFloat"></div>
 
     {{#model}}
 
