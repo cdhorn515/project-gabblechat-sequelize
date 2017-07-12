@@ -38,10 +38,10 @@ module.exports = {
       userId: req.session.userId
     }).then(function(newGab) {
       req.session.gabId = newGab.id;
-      var context = {
-        message: "uploaded new gab"
-      };
-      res.render('creategab', context);
+      // var context = {
+      //   message: "uploaded new gab"
+      // };
+      res.redirect('/gabhome');
     });
     // }
   },

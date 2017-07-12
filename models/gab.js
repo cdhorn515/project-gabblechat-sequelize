@@ -3,8 +3,7 @@ module.exports = function(sequelize, DataTypes) {
   var Gab = sequelize.define('Gab', {
     likeCount: DataTypes.VIRTUAL,
     text: {
-      type: DataTypes.STRING,
-      max: 140
+      type: DataTypes.STRING(140)
     },
     userId: {
       type: DataTypes.INTEGER,

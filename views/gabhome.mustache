@@ -49,7 +49,7 @@
   <p>{{createdAt}}
   </p>
 {{#UserLikes.length}}
-  <form class="numOfLikes" action="/likes/{{id}}" method="get">
+  <form class="numOfLikes" action="/viewLikes/{{id}}" method="get">
     <input type="submit" name="" value="{{.}} like(s)" id="{{id}}">
   </form>
 {{/UserLikes.length}}
