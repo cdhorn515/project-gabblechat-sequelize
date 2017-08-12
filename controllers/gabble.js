@@ -38,9 +38,6 @@ module.exports = {
       userId: req.session.userId
     }).then(function(newGab) {
       req.session.gabId = newGab.id;
-      // var context = {
-      //   message: "uploaded new gab"
-      // };
       res.redirect('/gabhome');
     });
     // }
@@ -51,7 +48,6 @@ module.exports = {
         id: req.params.id
       }
     }).then(function(gab) {
-      // models.User.setUserLikes(gab);
       console.log('firing', req.session.user);
       gab.addUserLikes(req.session.userId);
       res.redirect('/gabhome');
@@ -81,7 +77,6 @@ module.exports = {
 
           console.log(result[i].name);
           context.likes.push(result[i].name);
-          // console.log("LIKES ", context.likes);
         }
         res.render('likes', context);
       });
@@ -94,94 +89,5 @@ module.exports = {
       }
     });
     res.redirect('/gabhome');
-// });
   }
 };
-
-//hang on to for now:
-///////////////////
-//     models.Gab.findOne({
-//       where: {
-//         id: req.params.id
-//       }
-//         // include: [{
-//         //   model: models.User,
-//         //   as: 'user'
-//         // }],
-// }).then(function(gab){
-//   console.log('FINDING GAB TO DELETE ', gab);
-// //?
-//   //  gab.getUserLikes(req.params.id).then(function(){
-//     console.log("gab to delete? ", gab);
-/////////////////
-
-
-// var gab = models.Gab.findAll().then(function(gabs){
-//   gab.getUserLikes();
-// console.log("HERE ", getUserLikes);
-
-// });
-
-// models.Gab.findOne({
-//   where: {
-//     id: req.params.id
-//   },
-//   include: [{
-//     model: models.User,
-//     as: 'user'
-//   }],
-// }).then(function(gab) {
-//   // models.User.setUserLikes(gab);
-//   console.log(req.session.user);
-//   gab.getUserLikes(req.session.userId);
-//
-//   console.log('trying to add like to userGabs table');
-//   var context = {
-//     model: gab,
-//     name: req.session.name,
-//     loggedIn: true,
-//     signedIn: true,
-//     id: req.params.id
-//   };
-// req.session.gabId = gabId;
-
-// res.render('likes', context);
-/*
-models.Gab.findOne({
-  where: {
-    id: req.params.id,
-    userId: req.session.userId
-  }
-}).then(function(gab){
-  gab.getGabLikes.destroy({
-    where: {
-      id: req.params.id
-    }
-  }).then(function(gab){
-    console.log(GabLikes);
-  });
-},
-models.Gab.destroy({
-  where: {
-    id: req.params.id,
-    userId: req.session.userId
-  }
-}).then(function() {
-  console.log('removed gab #', req.body.id);
-  res.redirect('/gabhome');
-})
-);
-
-*/
-
-
-/*
-models.Gab.findAll({
-  include: [
-    {
-      model: models.User,
-      as: 'userId',
-      through: 'userGabs'
-    }
-  ]
-  */
